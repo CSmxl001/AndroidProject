@@ -1,9 +1,14 @@
 package com.example.notifity;
 
-import android.support.v7.app.ActionBarActivity;
+import android.R.color;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -11,24 +16,45 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		createNotifity();
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+	
+	private void createNotifity()
+	{
+		/*int icon = R.drawable.ic_launcher;
+		String text = "notifity";
+		long when = System.currentTimeMillis();
+		
+		
+		Notification notifity = new Notification(icon,text,when);
+		
+		notifity.number++;
+		notifity.defaults = Notification.DEFAULT_SOUND|Notification.DEFAULT_VIBRATE;
+		
+		Uri ringUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+		notifity.sound = ringUri;
+		
+		long[] vibrate = new long[]{1000,1000,1000,1000,1000};
+		notifity.vibrate = vibrate;
+		
+		notifity.ledARGB = Color.RED;
+		notifity.ledOffMS = 0;
+		notifity.ledOnMS = 1;
+		notifity.flags = notifity.flags|Notification.FLAG_SHOW_LIGHTS;*/
+		
+		Notification.Builder builder = new Notification.Builder(this);
+		
+		builder.setSmallIcon(R.drawable.ic_launcher)
+		.setTicker("notifity")
+		.setWhen(System.currentTimeMillis())
+		.setDefaults(Notification.DEFAULT_SOUND|Notification.DEFAULT_VIBRATE)
+		.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+		.setVibrate(new long[]{1000,1000,1000,1000,1000})
+		.setLights(Color.RED, 0, 1);
+		
+		Notification notifity = builder.getNotification();
+		NotificationManager mangerManager= (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		mangerManager.notify(1,notifity);
 	}
 }
