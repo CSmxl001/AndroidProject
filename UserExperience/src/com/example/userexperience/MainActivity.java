@@ -1,34 +1,65 @@
 package com.example.userexperience;
 
-import android.support.v7.app.ActionBarActivity;
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.activity_main);
+//		createAnimator();
+		
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+	private void createAnimator() {
+		TextView tt = (TextView) findViewById(R.id.txt);
 
+		Animator anim = AnimatorInflater.loadAnimator(this,
+				R.animator.animatortest);
+		anim.setTarget(tt);
+		anim.setInterpolator(new AnticipateOvershootInterpolator());
+		anim.start();
+	}
+	
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+	public boolean onTouchEvent(MotionEvent event) {
+		int action = event.getAction();
+		switch (action) {
+		case MotionEvent.ACTION_DOWN:
+//			Log.d("OUT:", "down");
 			return true;
+		case MotionEvent.ACTION_MOVE:
+//			Log.d("OUT:", "move");
+			return true;
+		case MotionEvent.ACTION_UP:
+//			Log.d("OUT:", "up");
+			return true;
+		case MotionEvent.ACTION_CANCEL:
+//			Log.d("OUT:", "cancel");
+			return true;
+		case MotionEvent.ACTION_OUTSIDE:
+//			Log.d("OUT:", "outsize");
+			return true;
+		default:
+			return super.onTouchEvent(event);
 		}
-		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public boolean onTrackballEvent(MotionEvent event) {
+		float v = event.getY();
+		float h = event.getX();
+		
+		Log.d("OUT:", v+"");
+		return false;
 	}
 }
