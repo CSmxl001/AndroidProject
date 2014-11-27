@@ -13,16 +13,16 @@ public class NoteDB extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL("CREATE TABLE" + TABLE_NAME_NOTES + "(" + COLUME_NAME_ID
-				+ "INTEGER PRIMARY KEY AUTOINCREAMENT," + COLUME_NAME_NOTE_NAME
-				+ "TEXT NOT NULL DEFAULT \"\"," + COLUME_NAME_NOTE_CONTENT
-				+ "TEXT NOT NULL DEFAULT \"\"," + COLUME_NAME_NOTE_DATE
-				+ "TEXT NOT NULL DEFAULT \"\")");
+		db.execSQL("CREATE TABLE " + TABLE_NAME_NOTES + "(" + COLUME_NAME_ID
+				+ " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUME_NAME_NOTE_NAME
+				+ " TEXT NOT NULL DEFAULT \"\"," + COLUME_NAME_NOTE_CONTENT
+				+ " TEXT NOT NULL DEFAULT \"\"," + COLUME_NAME_NOTE_DATE
+				+ " TEXT NOT NULL DEFAULT \"\")");
 
-		db.execSQL("CREATE TABLE" + TABLE_NAME_MEDIA + "("
-				+ COLUME_MEDIA_NOTE_ID + "INTEGER PRIMATY KEY AUTOINCREAMENT,"
-				+ COLUME_MEDIA_PATH + "TEXT NOT NULL DEFAULT \"\","
-				+ COLUME_MEDIA_NOTE_ID + "INTEGRE NOT NULL DEFAULT 0)");
+		db.execSQL("CREATE TABLE " + TABLE_NAME_MEDIA + "("
+				+ COLUME_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ COLUME_MEDIA_PATH + " TEXT NOT NULL DEFAULT \"\","
+				+ COLUME_MEDIA_NOTE_ID + " INTEGRE NOT NULL DEFAULT 0)");
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class NoteDB extends SQLiteOpenHelper {
 
 	public static final String TABLE_NAME_NOTES = "notes";
 	public static final String TABLE_NAME_MEDIA = "media";
-
+	
 	public static final String COLUME_NAME_ID = "_id";
 	public static final String COLUME_NAME_NOTE_NAME = "name";
 	public static final String COLUME_NAME_NOTE_CONTENT = "content";
